@@ -13,7 +13,7 @@ export const employeeActions = {
     };
 
     store.setState({
-      employees: [...state.employees, newEmployee],
+      employees: [newEmployee, ...state.employees],
     });
 
     return newEmployee;

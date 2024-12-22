@@ -767,11 +767,11 @@ export class EmployeeView extends TranslationMixin(LitElement) {
   }
 
   toggleAllEmployees(e) {
-    const isChecked = e.target.classList.contains("checked");
+    const isChecked = e.detail.checked;
     if (isChecked) {
-      this.selectedEmployees = [];
-    } else {
       this.selectedEmployees = this.paginatedEmployees.map((emp) => emp.id);
+    } else {
+      this.selectedEmployees = [];
     }
   }
 

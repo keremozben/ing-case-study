@@ -23,8 +23,8 @@ Ensure you have the following installed on your system:
 1. **Clone the Repository**
 
    ```bash
-   git clone <repository-url>
-   cd employee-management-app
+   git clone https://github.com/keremozben/ing-case-study.git
+   cd ing-case-study
    ```
 
 2. **Install Dependencies**

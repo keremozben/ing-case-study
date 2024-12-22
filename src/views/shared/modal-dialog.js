@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
+import { TranslationMixin } from "../../mixins/translation-mixin";
 
-export class ModalDialog extends LitElement {
+export class ModalDialog extends TranslationMixin(LitElement) {
   static properties = {
     open: { type: Boolean },
     title: { type: String },
@@ -207,7 +208,7 @@ export class ModalDialog extends LitElement {
             <button
               class="close-button"
               @click=${this._handleCancel}
-              aria-label="Close"
+              aria-label=${this.t("modal.close")}
             >
               ×
             </button>
@@ -219,16 +220,16 @@ export class ModalDialog extends LitElement {
             <button
               class="cancel"
               @click=${this._handleCancel}
-              aria-label="Cancel"
+              aria-label=${this.t("modal.cancel")}
             >
-              Cancel
+              ${this.t("modal.cancel")}
             </button>
             <button
               class="proceed"
               @click=${this._handleProceed}
-              aria-label="Proceed"
+              aria-label=${this.t("modal.proceed")}
             >
-              Proceed
+              ${this.t("modal.proceed")}
             </button>
           </div>
         </div>

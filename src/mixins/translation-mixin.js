@@ -2,33 +2,29 @@ import { translationService } from "../i18n/translation-service";
 
 export const TranslationMixin = (superClass) =>
   class extends superClass {
-    t(key, params) {
-      return translationService.t(key, params);
-    }
-
-    static get properties() {
-      return {
-        ...super.properties,
-        language: { type: String },
-      };
-    }
-
     constructor() {
       super();
-      this.language = translationService.language;
+      this._handleLanguageChange = this._handleLanguageChange.bind(this);
     }
 
     connectedCallback() {
-      super.connectedCallback();
-      this._handleLanguageChange = () => {
-        this.language = document.documentElement.lang;
-        this.requestUpdate();
-      };
-      window.addEventListener("languagechange", this._handleLanguageChange);
+      super.connectedCallback?.();
+      window.addEventListener("language-changed", this._handleLanguageChange);
     }
 
     disconnectedCallback() {
-      super.disconnectedCallback();
-      window.removeEventListener("languagechange", this._handleLanguageChange);
+      super.disconnectedCallback?.();
+      window.removeEventListener(
+        "language-changed",
+        this._handleLanguageChange
+      );
+    }
+
+    _handleLanguageChange() {
+      this.requestUpdate();
+    }
+
+    t(key, params = {}) {
+      return translationService.t(key, params);
     }
   };

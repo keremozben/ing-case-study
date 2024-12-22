@@ -97,7 +97,7 @@ export class EmployeeTable extends TranslationMixin(LitElement) {
                     .employee=${emp}
                     .selected=${this.selectedEmployees.includes(emp.id)}
                     @toggle-select=${(e) =>
-                      this._handleToggleEmployee(e.detail.employeeId, e)}
+                      this._handleToggleEmployee(e.detail)}
                     @edit-employee=${(e) => this._handleEdit(e.detail.employee)}
                     @delete-employee=${(e) =>
                       this._handleDelete(e.detail.employee)}
@@ -112,22 +112,22 @@ export class EmployeeTable extends TranslationMixin(LitElement) {
   }
 
   _handleToggleAll(e) {
-    const isChecked = e.target.checked;
+    // Dispatch the toggle-all event with the checked status
     this.dispatchEvent(
       new CustomEvent("toggle-all", {
-        detail: { isChecked },
+        detail: { checked: e.target.checked },
         bubbles: true,
         composed: true,
       })
     );
   }
 
-  _handleToggleEmployee(employeeId) {
+  _handleToggleEmployee(event) {
     this.dispatchEvent(
       new CustomEvent("toggle-employee", {
         detail: {
-          employeeId,
-          checked: e.detail.checked,
+          employeeId: event.employeeId,
+          checked: event.checked,
         },
         bubbles: true,
         composed: true,

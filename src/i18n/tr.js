@@ -71,4 +71,14 @@ export const tr = {
     medior: "Medior",
     senior: "Senior",
   },
+  languageSelector: {
+    selectLanguage: "Select Language",
+    english: "English",
+    turkish: "Türkçe",
+  },
+  modal: {
+    cancel: "İptal",
+    proceed: "Devam Et",
+    close: "Kapat",
+  },
 };

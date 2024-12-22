@@ -36,27 +36,45 @@ export class LanguageSelector extends TranslationMixin(LitElement) {
   constructor() {
     super();
     this.currentLanguage = translationService.language;
+    this._handleLanguageChange = this._handleLanguageChange.bind(this);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("language-changed", this._handleLanguageChange);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener("language-changed", this._handleLanguageChange);
+  }
+
+  _handleLanguageChange(e) {
+    this.currentLanguage = e.detail.language;
+    this.requestUpdate();
+  }
+
+  _handleSelectChange(e) {
+    const newLanguage = e.target.value;
+    this.currentLanguage = newLanguage;
+    translationService.setLanguage(newLanguage);
   }
 
   render() {
     return html`
       <select
-        @change=${this._handleLanguageChange}
+        @change=${this._handleSelectChange}
         .value=${this.currentLanguage}
-        aria-label="Select language"
+        aria-label=${this.t("languageSelector.ariaLabel")}
       >
-        <option value="en">${this.t("languageSelector.english")}</option>
-        <option value="tr">${this.t("languageSelector.turkish")}</option>
+        <option value="en" ?selected=${this.currentLanguage === "en"}>
+          ${this.t("languageSelector.english")}
+        </option>
+        <option value="tr" ?selected=${this.currentLanguage === "tr"}>
+          ${this.t("languageSelector.turkish")}
+        </option>
       </select>
     `;
-  }
-
-  _handleLanguageChange(e) {
-    const newLanguage = e.target.value;
-    this.currentLanguage = newLanguage;
-    translationService.setLanguage(newLanguage);
-
-    window.dispatchEvent(new Event("languagechange"));
   }
 }
 

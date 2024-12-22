@@ -77,4 +77,9 @@ export const en = {
     english: "English",
     turkish: "Türkçe",
   },
+  modal: {
+    cancel: "Cancel",
+    proceed: "Proceed",
+    close: "Close",
+  },
 };
