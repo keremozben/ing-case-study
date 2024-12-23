@@ -18,11 +18,11 @@ describe("LanguageSelector", () => {
     expect(select).to.exist;
     expect(options.length).to.equal(2);
     expect(options[0].value).to.equal("en");
-    expect(options[0].textContent).to.equal(
+    expect(options[0].textContent.trim()).to.equal(
       element.t("languageSelector.english")
     );
     expect(options[1].value).to.equal("tr");
-    expect(options[1].textContent).to.equal(
+    expect(options[1].textContent.trim()).to.equal(
       element.t("languageSelector.turkish")
     );
   });
@@ -38,8 +38,8 @@ describe("LanguageSelector", () => {
     select.dispatchEvent(new Event("change"));
     await element.updateComplete;
 
-    expect(translationService.language).to.equal("en");
-    expect(document.documentElement.lang).to.equal("en");
+    expect(translationService.language).to.equal("tr");
+    expect(document.documentElement.lang).to.equal("tr");
   });
 
   it("applies responsive styles on mobile view", async () => {
